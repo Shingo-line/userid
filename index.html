@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>あなたのUser ID</h2>
+  <p id="uid">取得中...</p>
+
+  <script>
+    liff.init({ liffId: "ここにあなたのLIFF ID" }).then(() => {
+      liff.getProfile().then(profile => {
+        document.getElementById("uid").innerText = profile.userId;
+      });
+    });
+  </script>
+</body>
+</html>
