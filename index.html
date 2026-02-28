@@ -9,7 +9,7 @@
   <p id="uid">取得中...</p>
 
   <script>
-    liff.init({ liffId: "ここにあなたのLIFF ID" }).then(() => {
+    liff.init({ liffId: "https://liff.line.me/2009266278-i2qYKRdI" }).then(() => {
       liff.getProfile().then(profile => {
         document.getElementById("uid").innerText = profile.userId;
       });
