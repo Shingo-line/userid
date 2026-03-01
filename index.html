@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>LINE User ID Checker</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
@@ -9,10 +10,27 @@
   <p id="uid">取得中...</p>
 
   <script>
-    liff.init({ liffId: "2009266278-i2qYKRdI" }).then(() => {
-      liff.getProfile().then(profile => {
-        document.getElementById("uid").innerText = profile.userId;
-      });
+    liff.init({ 
+      liffId: "2009266278-i2qYKRdI" // あなたのLIFF ID
+    })
+    .then(() => {
+      // 1. ログインしているかチェック
+      if (!liff.isLoggedIn()) {
+        // 2. ログインしていなければログイン画面へ（これが足りなかった！）
+        liff.login();
+      } else {
+        // 3. ログイン済みならプロフィールを取得
+        liff.getProfile()
+          .then(profile => {
+            document.getElementById("uid").innerText = profile.userId;
+          })
+          .catch(err => {
+            document.getElementById("uid").innerText = "取得失敗: " + err;
+          });
+      }
+    })
+    .catch((err) => {
+      document.getElementById("uid").innerText = "初期化エラー: " + err;
     });
   </script>
 </body>
